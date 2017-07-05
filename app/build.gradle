@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'key2'
+            keyPassword '123456'
+            //CHANGE THE STORE KEY FILE PATH TO YOUR LOCAL MACHINE /<PATH_TO_PROJECT>/Key2.jks
+            storeFile file('/Users/nishanthkumarg/Nishanth/3.0/4139602/Projects/MyApplication10/key2.jks')
+            storePassword '123456'
+        }
+    }
+    compileSdkVersion 26
+    buildToolsVersion "26.0.0"
+    defaultConfig {
+        applicationId "com.example.nishanthkumarg.myapplication"
+        minSdkVersion 21
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.config
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta2'
+    testImplementation 'junit:junit:4.12'
+    implementation 'com.android.support:support-v4:26.0.0-beta2'
+    implementation 'com.android.support:recyclerview-v7:26.0.0-beta2'
+    implementation 'com.android.support:design:26.0.0-beta2'
+    implementation project(':mylibrary')
+}
